@@ -186,7 +186,7 @@ int Player::betRequest(json::Value game_state)
     }
 
 
-    if (abs(c1.rank - c2.rank) > 3  && (c1.suit!=c2.suit) && playerCount>3)
+    if (abs(c1.rank - c2.rank) > 3  && (c1.suit!=c2.suit) && playerCount>3 && !(c1.rank == 14 || (c2.rank == 14)))
         return 0;
 
     if ((c1.rank == c2.rank +1 || c1.rank == c2.rank-1) && c1.suit == c2.suit)
