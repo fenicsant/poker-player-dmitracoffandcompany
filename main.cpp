@@ -8,10 +8,10 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    string action = argv[1];
+    string action = (argc>1)?argv[1]:"";
     string game_state_json;
     getline(cin, game_state_json);
-    cout<<endl<<game_state_json<<endl;
+    cout<<"cout:"<<endl<<game_state_json<<endl;
 
     json::Value game_state = json::Deserialize(game_state_json);
 

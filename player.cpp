@@ -2,11 +2,13 @@
 
 #include <list>
 
+
 const char* Player::VERSION = "Default C++ folding player";
 
-/*
 class Hand;
 
+
+using namespace std;
 
 class Card
 {
@@ -29,7 +31,7 @@ class Hand
    list<Card> cards;
    int cost();
 };
-*/
+
 
 int Player::betRequest(json::Value game_state)
 {
