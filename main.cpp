@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
     string action = (argc>1)?argv[1]:"";
     string game_state_json;
     getline(cin, game_state_json);
-    cerr<<"cout:"<<endl<<game_state_json<<endl;
+    //cerr<<"cout:"<<endl<<game_state_json<<endl;
 
     json::Value game_state = json::Deserialize(game_state_json);
 

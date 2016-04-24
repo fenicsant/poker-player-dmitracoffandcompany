@@ -7,7 +7,7 @@ const char* Player::VERSION = "Default C++ folding player";
 
 class Hand;
 
-
+/*
 using namespace std;
 
 class Card
@@ -32,6 +32,7 @@ class Hand
    int cost();
 };
 
+*/
 
 int Player::betRequest(json::Value game_state)
 {
