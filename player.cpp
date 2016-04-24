@@ -94,7 +94,7 @@ int Player::betRequest(json::Value game_state)
 
     Card c1 = table.self->cards.front();
     Card c2 = table.self->cards.back();
-    Hand hand;
+    /*Hand hand;
     hand.cards.resize(comm.size()+2);
     hand.cards[0] = c1;
     hand.cards[1] = c2;
@@ -103,7 +103,7 @@ int Player::betRequest(json::Value game_state)
     }
 
     return SelfStack*hand.cost()/100;
-
+    */
     if (comm.size()>1) {
         //proverka na set i kare
         cerr << "stack =" << SelfStack << endl;
