@@ -1,6 +1,7 @@
 #include "player.h"
 
 #include <list>
+#include <vector>
 #include <iostream>
 
 
@@ -58,6 +59,8 @@ int Player::betRequest(json::Value game_state)
     }
     Table table;
     json::Array aplayers = players.ToArray();
+    int cur_bet = 0;
+    int playerCount = aplayers.size();
     for (int i=aplayers.size()-1; i>=0; --i) {
         if (aplayers[i].GetType() != json::ObjectVal) continue;
         json::Object player = aplayers[i].ToObject();
@@ -70,9 +73,16 @@ int Player::betRequest(json::Value game_state)
             Card c2 = table.self->cards.back();
             cerr<<"cards: "<<c1.suit<<c1.rank<<c2.suit<<c2.rank<<endl;
         } else {
-
+            int bet=player["bet"].ToInt();
+            if (cur_bet<bet) cur_bet = bet;
         }
         cerr<<"player:"<<player["name"].ToString()<<endl;
+    }
+
+    json::Array jsComm = gsObj["community_cards"].ToArray();
+    vector<Card> comm(jsComm.size());
+    for(int  i=jsComm.size()-1; i>=0; --i) {
+        comm[i]=Card(jsComm[i]["suit"].ToString(),jsComm[i]["rank"].ToString());
     }
 
 
