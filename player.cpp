@@ -59,7 +59,10 @@ int Player::betRequest(json::Value game_state)
     }
     Table table;
     json::Array aplayers = players.ToArray();
+
     int cur_bet = 0;
+    int SelfStack = 0;
+
     int playerCount = aplayers.size();
     for (int i=aplayers.size()-1; i>=0; --i) {
         if (aplayers[i].GetType() != json::ObjectVal) continue;
@@ -71,6 +74,7 @@ int Player::betRequest(json::Value game_state)
             table.self->cards.push_back(Card(cards[1]["suit"].ToString(),cards[1]["rank"].ToString()));
             Card c1 = table.self->cards.front();
             Card c2 = table.self->cards.back();
+            SelfStack = player["stack"].ToInt();
             cerr<<"cards: "<<c1.suit<<c1.rank<<c2.suit<<c2.rank<<endl;
         } else {
             int bet=player["bet"].ToInt();
@@ -90,18 +94,18 @@ int Player::betRequest(json::Value game_state)
 
     Card c1 = table.self->cards.front();
     Card c2 = table.self->cards.back();
-    if (abs(c1.rank - c2.rank) > 3  && (c1.suit!=c2.suit))
-        return 40;
+    if (abs(c1.rank - c2.rank) > 3  && (c1.suit!=c2.suit) && playerCount>3)
+        return 0;
 
     if ((c1.rank == c2.rank +1 || c1.rank == c2.rank-1) && c1.suit == c2.suit)
-        return 1000;
-    if (c1.rank == c2.rank)
-        return 1000;
-    if (c1.suit == c2.suit)
         return 500;
+    if (c1.rank == c2.rank)
+        return 300;
+    if (c1.suit == c2.suit)
+        return 200;
 
     if (c1.rank == c2.rank +1 || c1.rank == c2.rank-1)
-        return 500;
+        return 200;
 
     int bet = 150;
     return bet;
