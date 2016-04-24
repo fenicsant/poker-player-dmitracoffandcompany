@@ -36,7 +36,7 @@ class Hand
 
 int Player::betRequest(json::Value game_state)
 {
-    int bet = random();
+    int bet = 150;
     return bet;
 }
 
