@@ -69,6 +69,8 @@ int Player::betRequest(json::Value game_state)
             Card c1 = table.self->cards.front();
             Card c2 = table.self->cards.back();
             cerr<<"cards: "<<c1.suit<<c1.rank<<c2.suit<<c2.rank<<endl;
+        } else {
+
         }
         cerr<<"player:"<<player["name"].ToString()<<endl;
     }
@@ -78,6 +80,9 @@ int Player::betRequest(json::Value game_state)
 
     Card c1 = table.self->cards.front();
     Card c2 = table.self->cards.back();
+    if (abs(c1.rank - c2.rank) > 3  && (c1.suit!=c2.suit))
+        return 40;
+
     if ((c1.rank == c2.rank +1 || c1.rank == c2.rank-1) && c1.suit == c2.suit)
         return 1000;
     if (c1.rank == c2.rank)
