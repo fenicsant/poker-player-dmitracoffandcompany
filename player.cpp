@@ -133,8 +133,7 @@ int Player::betRequest(json::Value game_state)
     if (c1.rank == c2.rank +1 || c1.rank == c2.rank-1)
         return 200;
 
-    int bet = 150;
-    return bet;
+    return (cur_bet>200)?0:cur_bet;
 }
 
 void Player::showdown(json::Value game_state)
