@@ -3,6 +3,7 @@
 #include <list>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 
 const char* Player::VERSION = "Default C++ folding player";
@@ -36,7 +37,7 @@ public :
 class Hand
 {
 public:
-   std::list<Card> cards;
+   std::vector<Card> cards;
    int cost();
 };
 
@@ -159,4 +160,48 @@ Card::Card(const string &s, const string &r)
 iostream Card::operator<<(const iostream &b)
 {
     //return (b<<"["<<rank<<suit<<"]");
+}
+
+
+int Hand::cost()
+{
+    bool street = true;
+    bool flash = true;
+    vector<int> ranks(cards.size());
+    for(int i=cards.size(); i>=0; --i) {
+        ranks[i] = cards[i].rank;
+        if (i>0 && cards[i].suit != cards[i-1].suit) flash = false;
+    }
+    sort(ranks.begin(),ranks.end());
+    int dif = 4 - cards.size();
+    for(int i=ranks.size(); i>=1 && street; --i) {
+        if (ranks[i]-ranks[i-1]>dif) {
+            street = false;
+            break;
+        }
+        if (ranks[i]-ranks[i-1]==1) {
+            continue;
+        }
+        dif -= ranks[i] - ranks[i-1] +1;
+    }
+
+    if (cards.size()==2) {
+        if (cards[0].rank == cards[1].rank) return 50;
+        if (cards[0].suit == cards[1].suit) return 30;
+        if (cards[0].rank > 10 && cards[1].rank > 10) return 20;
+        if (abs(cards[0].rank-cards[1].rank) == 1) return 10;
+        return 0;
+    }
+    int sfcost = 0;
+    if ( flash || street ) {
+        sfcost = (street)?cards.size()*20:0 + (flash)?cards.size()*20:0;
+        if (sfcost>=100) return 100;
+    }
+    if (cards.size()==3) {
+        if (cards[0].rank == cards[1].rank == cards[2].rank ) return 100;
+    }
+    if (cards.size() == 4) {
+        if (cards[0].rank==cards[1].rank == cards[2].rank == cards[3].rank) return 100;
+    }
+    return 0;
 }
