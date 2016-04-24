@@ -94,6 +94,15 @@ int Player::betRequest(json::Value game_state)
 
     Card c1 = table.self->cards.front();
     Card c2 = table.self->cards.back();
+    Hand hand;
+    hand.cards.resize(comm.size()+2);
+    hand.cards[0] = c1;
+    hand.cards[1] = c2;
+    for (int i=comm.size()-1; i>=0; --i) {
+        hand.cards[i+2] = comm[i];
+    }
+
+    return SelfStack*hand.cost()/100;
 
     if (comm.size()>1) {
         //proverka na set i kare
@@ -259,5 +268,5 @@ int Hand::cost()
     if (cards.size() == 4) {
         if (cards[0].rank==cards[1].rank == cards[2].rank == cards[3].rank) return 100;
     }
-    return 0;
+    return sfcost;
 }
