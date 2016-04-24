@@ -20,14 +20,16 @@ public:
     Card():suit(hearts),rank(0){}
     Card(Suit s, int r):suit(s),rank(r){}
     Card(const string & s,const string &r);
+    iostream operator<<(const iostream &b);
 };
 
 class Table
 {
 public :
     Hand * self;
-    std::list<Hand*> player;
+    std::list<int> bet;
     std::list<Card> common;
+    Table();//:self(new Hand()){}
 };
 
 class Hand
@@ -37,6 +39,8 @@ public:
    int cost();
 };
 
+
+Table::Table():self(new Hand()){}
 
 #define BadJsonBet 150
 
@@ -60,13 +64,22 @@ int Player::betRequest(json::Value game_state)
         if (player["name"].ToString() == "DmitracoffAndCompany") {
             json::Array cards = player["hole_cards"].ToArray();
             if (cards.size()<2) return 0;
-            table.self->cards.push_back(Card());
+            table.self->cards.push_back(Card(cards[0]["suit"].ToString(),cards[0]["rank"].ToString()));
+            table.self->cards.push_back(Card(cards[1]["suit"].ToString(),cards[1]["rank"].ToString()));
+            Card c1 = table.self->cards.front();
+            Card c2 = table.self->cards.back();
+            cerr<<"cards: "<<c1.suit<<c1.rank<<c2.suit<<c2.rank<<endl;
         }
         cerr<<"player:"<<player["name"].ToString()<<endl;
     }
 
 
     cerr<<"ok"<<endl;
+
+    Card c1 = table.self->cards.front();
+    Card c2 = table.self->cards.back();
+    if (c1.rank == c2.rank)
+        return 1000;
 
 
 
@@ -84,11 +97,17 @@ Card::Card(const string &s, const string &r)
 { //hearts, spades, clubs, diamonds
     if (s=="spades") suit=spades;
     if (s=="clubs") suit=clubs;
-    if (s=="diamonts") suit=diamonds;
+    if (s=="diamonds") suit=diamonds;
+
     if (r=="A") rank = 14;
     if (r=="K") rank = 13;
     if (r=="Q") rank = 12;
     if (r=="J") rank = 11;
     if (r=="10") rank = 10;
     if (rank==0 && r.size()>0) rank=r[0] - '0';
+}
+
+iostream Card::operator<<(const iostream &b)
+{
+    //return (b<<"["<<rank<<suit<<"]");
 }
