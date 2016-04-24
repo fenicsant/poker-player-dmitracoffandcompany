@@ -115,8 +115,6 @@ int Player::betRequest(json::Value game_state)
                     count2++;
             if (count1 + count2 > 3)
                 return SelfStack;
-            if (count1 + count2 == 3)
-                return SelfStack / 5;
         }
         //proverka flash
         if (c1.suit == c2.suit)
