@@ -1,11 +1,10 @@
 #include "player.h"
 
-const char* Player::VERSION = "Default C++ folding player";
-
 #include <list>
 
 const char* Player::VERSION = "Default C++ folding player";
 
+/*
 class Hand;
 
 
@@ -30,7 +29,7 @@ class Hand
    list<Card> cards;
    int cost();
 };
-
+*/
 
 int Player::betRequest(json::Value game_state)
 {
