@@ -1,0 +1,186 @@
+{
+   "round" : 143,
+   "current_buy_in" : 0,
+   "pot" : 0,
+   "orbits" : 20,
+   "game_id" : "571c7f62368a420003000094",
+   "small_blind" : 40,
+   "community_cards" : [
+      {
+         "rank" : "Q",
+         "suit" : "hearts"
+      },
+      {
+         "suit" : "clubs",
+         "rank" : "A"
+      },
+      {
+         "suit" : "spades",
+         "rank" : "4"
+      },
+      {
+         "rank" : "A",
+         "suit" : "hearts"
+      },
+      {
+         "suit" : "diamonds",
+         "rank" : "J"
+      }
+   ],
+   "players" : [
+      {
+         "id" : 0,
+         "bet" : 0,
+         "name" : "DedicatedTeam",
+         "status" : "out",
+         "version" : "0.1.2",
+         "stack" : 0
+      },
+      {
+         "stack" : 24,
+         "version" : "SuperRubyTeam call_bet",
+         "name" : "RubyTeam",
+         "bet" : 0,
+         "status" : "folded",
+         "id" : 1
+      },
+      {
+         "version" : "Default Ruby folding player",
+         "stack" : 6974,
+         "bet" : 0,
+         "status" : "active",
+         "name" : "Comfortable Bear",
+         "amount_won" : 260,
+         "id" : 2
+      },
+      {
+         "hole_cards" : [],
+         "version" : "Default C++ folding player",
+         "stack" : 0,
+         "id" : 3,
+         "status" : "out",
+         "bet" : 0,
+         "name" : "DmitracoffAndCompany"
+      },
+      {
+         "id" : 4,
+         "status" : "out",
+         "bet" : 0,
+         "name" : "POXEP",
+         "version" : "POHER",
+         "stack" : 0
+      },
+      {
+         "version" : "Default JavaScript folding player",
+         "stack" : 0,
+         "id" : 5,
+         "bet" : 0,
+         "status" : "out",
+         "name" : "JSTeam"
+      },
+      {
+         "version" : "Pasha Team Player 0.0.3",
+         "stack" : 0,
+         "status" : "out",
+         "bet" : 0,
+         "name" : "Pasha Team",
+         "id" : 6
+      }
+   ],
+   "tournament_id" : "571260c407f6720003000002",
+   "big_blind" : 80,
+   "dealer" : 2
+}
+{
+   "game_id" : "571c7f62368a420003000094",
+   "dealer" : 2,
+   "round" : 143,
+   "small_blind" : 40,
+   "pot" : 0,
+   "big_blind" : 80,
+   "tournament_id" : "571260c407f6720003000002",
+   "current_buy_in" : 0,
+   "orbits" : 20,
+   "community_cards" : [
+      {
+         "suit" : "hearts",
+         "rank" : "Q"
+      },
+      {
+         "suit" : "clubs",
+         "rank" : "A"
+      },
+      {
+         "suit" : "spades",
+         "rank" : "4"
+      },
+      {
+         "suit" : "hearts",
+         "rank" : "A"
+      },
+      {
+         "rank" : "J",
+         "suit" : "diamonds"
+      }
+   ],
+   "players" : [
+      {
+         "bet" : 0,
+         "status" : "out",
+         "stack" : 0,
+         "id" : 0,
+         "version" : "0.1.2",
+         "name" : "DedicatedTeam"
+      },
+      {
+         "version" : "SuperRubyTeam call_bet",
+         "name" : "RubyTeam",
+         "stack" : 24,
+         "id" : 1,
+         "bet" : 0,
+         "status" : "folded"
+      },
+      {
+         "version" : "Default Ruby folding player",
+         "name" : "Comfortable Bear",
+         "stack" : 6974,
+         "id" : 2,
+         "amount_won" : 260,
+         "bet" : 0,
+         "status" : "active"
+      },
+      {
+         "id" : 3,
+         "stack" : 0,
+         "name" : "DmitracoffAndCompany",
+         "hole_cards" : [],
+         "version" : "Default C++ folding player",
+         "status" : "out",
+         "bet" : 0
+      },
+      {
+         "id" : 4,
+         "stack" : 0,
+         "name" : "POXEP",
+         "version" : "POHER",
+         "status" : "out",
+         "bet" : 0
+      },
+      {
+         "version" : "Default JavaScript folding player",
+         "name" : "JSTeam",
+         "stack" : 0,
+         "id" : 5,
+         "bet" : 0,
+         "status" : "out"
+      },
+      {
+         "bet" : 0,
+         "status" : "out",
+         "stack" : 0,
+         "id" : 6,
+         "version" : "Pasha Team Player 0.0.3",
+         "name" : "Pasha Team"
+      }
+   ]
+}
