@@ -41,6 +41,8 @@ public:
 };
 
 
+
+
 Table::Table():self(new Hand()){}
 
 #define BadJsonBet 150
@@ -62,8 +64,9 @@ int Player::betRequest(json::Value game_state)
 
     int cur_bet = 0;
     int SelfStack = 0;
-
     int playerCount = aplayers.size();
+
+
     for (int i=aplayers.size()-1; i>=0; --i) {
         if (aplayers[i].GetType() != json::ObjectVal) continue;
         json::Object player = aplayers[i].ToObject();
@@ -72,15 +75,11 @@ int Player::betRequest(json::Value game_state)
             if (cards.size()<2) return 0;
             table.self->cards.push_back(Card(cards[0]["suit"].ToString(),cards[0]["rank"].ToString()));
             table.self->cards.push_back(Card(cards[1]["suit"].ToString(),cards[1]["rank"].ToString()));
-            Card c1 = table.self->cards.front();
-            Card c2 = table.self->cards.back();
             SelfStack = player["stack"].ToInt();
-            cerr<<"cards: "<<c1.suit<<c1.rank<<c2.suit<<c2.rank<<endl;
         } else {
             int bet=player["bet"].ToInt();
             if (cur_bet<bet) cur_bet = bet;
         }
-        cerr<<"player:"<<player["name"].ToString()<<endl;
     }
 
     json::Array jsComm = gsObj["community_cards"].ToArray();
@@ -94,6 +93,33 @@ int Player::betRequest(json::Value game_state)
 
     Card c1 = table.self->cards.front();
     Card c2 = table.self->cards.back();
+
+    if (comm.size()>1) {
+        //proverka na set i kare
+        cerr << "stack =" << SelfStack << endl;
+        if (c1.rank == c2.rank) {
+            int count = 2;
+            for (int i=0; i < comm.size(); i++)
+                if (comm[i].rank == c1.rank)
+                    count++;
+            if (count > 2)
+                return SelfStack;
+        } else {
+            int count1 = 1;
+            for (int i=0; i < comm.size(); i++)
+                if (comm[i].rank == c1.rank)
+                    count1++;
+            int count2 = 1;
+            for (int i=0; i < comm.size(); i++)
+                if (comm[i].rank == c2.rank)
+                    count2++;
+            if (count1 + count2 > 3)
+                return SelfStack;
+            if (count1 + count2 == 3)
+                return SelfStack / 5;
+        }
+    }
+
     if (abs(c1.rank - c2.rank) > 3  && (c1.suit!=c2.suit) && playerCount>3)
         return 0;
 
