@@ -78,6 +78,8 @@ int Player::betRequest(json::Value game_state)
 
     Card c1 = table.self->cards.front();
     Card c2 = table.self->cards.back();
+    if ((c1.rank == c2.rank +1 || c1.rank == c2.rank-1) && c1.suit == c2.suit)
+        return 1000;
     if (c1.rank == c2.rank)
         return 1000;
     if (c1.suit == c2.suit)
