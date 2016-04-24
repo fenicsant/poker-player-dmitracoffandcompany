@@ -116,10 +116,66 @@ int Player::betRequest(json::Value game_state)
                     count2++;
             if (count1 + count2 > 3)
                 return SelfStack;
-            if (count1 + count2 == 3)
-                return SelfStack / 5;
+        }
+        //proverka flash
+        if (c1.suit == c2.suit)
+        {
+            int count = 2;
+            for (int i=0; i < comm.size(); i++)
+                if (comm[i].suit == c1.suit)
+                    count++;
+            if (comm.size() == 3)
+            {
+                if (count == 5) {
+                    return SelfStack;
+                }
+                if (count == 4) {
+                    return cur_bet > SelfStack/ 5 ? cur_bet: SelfStack/ 5;
+                }
+            }
+            if (comm.size() == 4)
+            {
+                if (count == 5) {
+                    return SelfStack;
+                }
+                if (count == 4) {
+                    return cur_bet > SelfStack/ 5 ? cur_bet: SelfStack/ 5;
+                }
+            }
+            if (comm.size() == 5)
+            {
+                if (count == 5) {
+                    return SelfStack;
+                }
+            }
+        } else {
+            int count1 =1;
+            for (int i=0; i < comm.size(); i++)
+                if (comm[i].suit == c1.suit)
+                    count1++;
+            int count2 = 1;
+            for (int i=0; i < comm.size(); i++)
+                if (comm[i].suit == c2.suit)
+                    count2++;
+            int count = count1 >= count2 ? count1 : count2;
+            if (comm.size() == 4)
+            {
+                if (count == 5) {
+                    return SelfStack;
+                }
+                if (count == 4) {
+                    return cur_bet > SelfStack/ 5 ? cur_bet: SelfStack/ 5;
+                }
+            }
+            if (comm.size() == 5)
+            {
+                if (count == 5) {
+                    return SelfStack;
+                }
+            }
         }
     }
+
 
     if (abs(c1.rank - c2.rank) > 3  && (c1.suit!=c2.suit) && playerCount>3)
         return 0;
